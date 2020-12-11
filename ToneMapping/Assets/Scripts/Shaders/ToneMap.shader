@@ -12,6 +12,8 @@
         Pass     //first pass
         {
             CGPROGRAM
+// Upgrade NOTE: excluded shader from DX11; has structs without semantics (struct appdata members exposure)
+#pragma exclude_renderers d3d11
             #pragma vertex vert
             #pragma fragment frag
             // make fog work
@@ -23,7 +25,8 @@
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
-                float3 normal : NORMAL;   //may need to change this
+                //float3 normal : NORMAL;   //may need to change this
+                float exposure = 1;
             };
 
             struct v2f     //pass from vertex to fragment shader  "outs" in openGL
@@ -42,6 +45,7 @@
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
+                //float3 normal =  UnityObjectToWorldNormal(/*multiplies by normal matrix*/)
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
