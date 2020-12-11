@@ -23,13 +23,15 @@
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float3 normal : NORMAL;   //may need to change this
             };
 
-            struct v2f     //pass from vertex to fragment shader
+            struct v2f     //pass from vertex to fragment shader  "outs" in openGL
             {
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
-                float4 vertex : SV_POSITION;
+                float4 vertex : SV_POSITION; //like GL_POSTION
+
             };
 
             ////declare uniforms and needed ins before shaders
